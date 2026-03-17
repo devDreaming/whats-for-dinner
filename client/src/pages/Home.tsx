@@ -20,7 +20,7 @@ export function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50">
-      <div className="container mx-auto px-4 py-8 max-w-3xl">
+      <main className="container mx-auto px-4 py-8 max-w-3xl">
         <header className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
             What's for Dinner?
@@ -35,7 +35,7 @@ export function Home() {
             <ProgressBar current={currentIndex} total={totalQuestions} />
 
             {error && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+              <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
                 {error}
               </div>
             )}
@@ -49,9 +49,10 @@ export function Home() {
             {canGoBack && (
               <button
                 onClick={goBack}
+                aria-label="Go back to previous question"
                 className="mt-6 text-gray-500 hover:text-gray-700 flex items-center gap-2 mx-auto"
               >
-                <span>←</span> Go back
+                <span aria-hidden="true">←</span> Go back
               </button>
             )}
           </>
@@ -62,7 +63,7 @@ export function Home() {
         {status === "result" && recommendation && (
           <MealRecommendation meal={recommendation} onStartOver={startOver} />
         )}
-      </div>
+      </main>
     </div>
   );
 }

@@ -12,20 +12,20 @@ export function MealRecommendation({
   return (
     <div className="w-full max-w-2xl mx-auto">
       <div className="text-center mb-8">
-        <span className="text-4xl mb-4 block">🍽️</span>
+        <span className="text-4xl mb-4 block" aria-hidden="true">🍽️</span>
         <h2 className="text-3xl font-bold text-gray-800 mb-2">{meal.name}</h2>
         <p className="text-gray-600">{meal.description}</p>
       </div>
 
       <div className="flex gap-4 justify-center mb-8">
-        <div className="bg-primary-50 px-4 py-2 rounded-full">
+        <div className="bg-primary-50 px-4 py-2 rounded-full" aria-label={`Cooking time: ${meal.cookingTime}`}>
           <span className="text-primary-700 font-medium">
-            ⏱️ {meal.cookingTime}
+            <span aria-hidden="true">⏱️</span> {meal.cookingTime}
           </span>
         </div>
-        <div className="bg-primary-50 px-4 py-2 rounded-full">
+        <div className="bg-primary-50 px-4 py-2 rounded-full" aria-label={`Difficulty: ${meal.difficulty}`}>
           <span className="text-primary-700 font-medium">
-            📊 {meal.difficulty}
+            <span aria-hidden="true">📊</span> {meal.difficulty}
           </span>
         </div>
       </div>
@@ -37,7 +37,7 @@ export function MealRecommendation({
         <ul className="grid grid-cols-2 gap-2">
           {meal.ingredients.map((ingredient, index) => (
             <li key={index} className="flex items-center text-gray-600">
-              <span className="w-2 h-2 bg-primary-400 rounded-full mr-2" />
+              <span className="w-2 h-2 bg-primary-400 rounded-full mr-2" aria-hidden="true" />
               {ingredient}
             </li>
           ))}
@@ -63,7 +63,7 @@ export function MealRecommendation({
       {meal.tips && (
         <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-8">
           <p className="text-yellow-800">
-            <span className="font-semibold">💡 Pro Tip:</span> {meal.tips}
+            <span className="font-semibold"><span aria-hidden="true">💡</span> Pro Tip:</span> {meal.tips}
           </p>
         </div>
       )}

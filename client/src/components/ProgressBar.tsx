@@ -16,6 +16,11 @@ export function ProgressBar({ current, total }: ProgressBarProps) {
       </div>
       <div className="w-full bg-gray-200 rounded-full h-2.5">
         <div
+          role="progressbar"
+          aria-valuenow={Math.round(percentage)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={`Question ${current + 1} of ${total}`}
           className="bg-primary-500 h-2.5 rounded-full transition-all duration-500 ease-out"
           style={{ width: `${percentage}%` }}
         />

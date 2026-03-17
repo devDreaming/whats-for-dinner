@@ -38,7 +38,7 @@ export function QuestionCard({
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      <h2 className="text-2xl font-bold text-gray-800 mb-2">{question.title}</h2>
+      <h2 id="question-title" className="text-2xl font-bold text-gray-800 mb-2">{question.title}</h2>
       <p className="text-gray-500 mb-6">{question.description}</p>
 
       {question.type === "text" ? (
@@ -47,6 +47,7 @@ export function QuestionCard({
             value={textValue}
             onChange={(e) => setTextValue(e.target.value)}
             placeholder="Type your answer here..."
+            aria-label={question.title}
             className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none h-32"
           />
           <button
@@ -58,7 +59,7 @@ export function QuestionCard({
           </button>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-3" role="group" aria-labelledby="question-title">
           {question.options?.map((option) => {
             const isSelected =
               question.type === "multiple"
@@ -73,6 +74,7 @@ export function QuestionCard({
                     ? handleSingleSelect(option)
                     : handleMultipleSelect(option)
                 }
+                aria-pressed={question.type === "multiple" ? isSelected : undefined}
                 className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
                   isSelected
                     ? "border-primary-500 bg-primary-50 text-primary-700"
@@ -87,7 +89,8 @@ export function QuestionCard({
           {question.type === "multiple" && (
             <button
               onClick={() => onAnswer(selectedOptions)}
-              className="w-full mt-4 py-3 px-6 bg-primary-500 text-white font-medium rounded-lg hover:bg-primary-600 transition-colors"
+              disabled={selectedOptions.length === 0}
+              className="w-full mt-4 py-3 px-6 bg-primary-500 text-white font-medium rounded-lg hover:bg-primary-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
             >
               Continue
             </button>
