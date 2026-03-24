@@ -75,7 +75,7 @@ export function QuestionCard({
                     : handleMultipleSelect(option)
                 }
                 aria-pressed={question.type === "multiple" ? isSelected : undefined}
-                className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
+                className={`w-full py-2 px-4 text-left rounded-lg border-2 transition-all ${
                   isSelected
                     ? "border-primary-500 bg-primary-50 text-primary-700"
                     : "border-gray-200 hover:border-primary-300 hover:bg-gray-50"
@@ -90,7 +90,7 @@ export function QuestionCard({
             <button
               onClick={() => onAnswer(selectedOptions)}
               disabled={selectedOptions.length === 0}
-              className="w-full mt-4 py-3 px-6 bg-primary-500 text-white font-medium rounded-lg hover:bg-primary-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+              className="w-full mt-4 py-2 px-4 bg-primary-500 text-white font-medium rounded-lg hover:bg-primary-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
             >
               Continue
             </button>

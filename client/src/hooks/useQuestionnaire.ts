@@ -79,7 +79,7 @@ const initialAnswers: QuestionnaireAnswers = {
 export function useQuestionnaire() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<QuestionnaireAnswers>(initialAnswers);
-  const [status, setStatus] = useState<QuestionnaireStatus>("questions");
+  const [status, setStatus] = useState<QuestionnaireStatus>("welcome");
   const [recommendation, setRecommendation] =
     useState<MealRecommendation | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -124,10 +124,18 @@ export function useQuestionnaire() {
     }
   }, [currentIndex]);
 
+  const begin = useCallback(() => {
+    setStatus("questions");
+  }, []);
+
+  const viewSavedMeals = useCallback(() => {
+    setStatus("saved");
+  }, []);
+
   const startOver = useCallback(() => {
     setCurrentIndex(0);
     setAnswers(initialAnswers);
-    setStatus("questions");
+    setStatus("welcome");
     setRecommendation(null);
     setError(null);
   }, []);
@@ -142,6 +150,8 @@ export function useQuestionnaire() {
     handleAnswer,
     goBack,
     startOver,
+    begin,
+    viewSavedMeals,
     canGoBack: currentIndex > 0,
   };
 }

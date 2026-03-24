@@ -3,16 +3,20 @@ import type { MealRecommendation as MealRecommendationType } from "../types";
 interface MealRecommendationProps {
   meal: MealRecommendationType;
   onStartOver: () => void;
+  onSave: () => void;
+  isSaved: boolean;
 }
 
 export function MealRecommendation({
   meal,
   onStartOver,
+  onSave,
+  isSaved,
 }: MealRecommendationProps) {
   return (
     <div className="w-full max-w-2xl mx-auto">
       <div className="text-center mb-8">
-        <span className="text-4xl mb-4 block" aria-hidden="true">🍽️</span>
+        <img src="/dinner.svg" alt="" aria-hidden="true" className="w-16 h-16 mb-4 mx-auto" />
         <h2 className="text-3xl font-bold text-gray-800 mb-2">{meal.name}</h2>
         <p className="text-gray-600">{meal.description}</p>
       </div>
@@ -61,19 +65,32 @@ export function MealRecommendation({
       </div>
 
       {meal.tips && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-8">
-          <p className="text-yellow-800">
+        <div className="bg-secondary-100 border border-secondary-300 rounded-xl p-4 mb-8">
+          <p className="text-primary-700">
             <span className="font-semibold"><span aria-hidden="true">💡</span> Pro Tip:</span> {meal.tips}
           </p>
         </div>
       )}
 
-      <button
-        onClick={onStartOver}
-        className="w-full py-3 px-6 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors"
-      >
-        Find Another Meal
-      </button>
+      <div className="flex gap-3">
+        <button
+          onClick={onSave}
+          disabled={isSaved}
+          className={`flex-1 py-3 px-6 font-medium rounded-lg transition-colors ${
+            isSaved
+              ? "bg-secondary-200 text-primary-700 cursor-default"
+              : "bg-primary-500 text-white hover:bg-primary-600"
+          }`}
+        >
+          {isSaved ? "Saved!" : "Save Meal"}
+        </button>
+        <button
+          onClick={onStartOver}
+          className="flex-1 py-3 px-6 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors"
+        >
+          Find Another Meal
+        </button>
+      </div>
     </div>
   );
 }

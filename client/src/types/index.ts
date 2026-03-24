@@ -24,4 +24,9 @@ export interface MealRecommendation {
   tips: string;
 }
 
-export type QuestionnaireStatus = "questions" | "loading" | "result";
+export interface SavedMeal extends MealRecommendation {
+  id: string;
+  savedAt: string;
+}
+
+export type QuestionnaireStatus = "welcome" | "questions" | "loading" | "result" | "saved";
