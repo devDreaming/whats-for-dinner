@@ -38,7 +38,7 @@ export function QuestionCard({
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      <h2 id="question-title" className="text-2xl font-bold text-gray-800 mb-2">{question.title}</h2>
+      <h2 id="question-title" className="font-bold text-gray-800 mb-2 text-xl">{question.title}</h2>
       <p className="text-gray-500 mb-6">{question.description}</p>
 
       {question.type === "text" ? (

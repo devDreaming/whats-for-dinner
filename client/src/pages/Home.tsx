@@ -27,10 +27,20 @@ export function Home() {
   return (
     <div className={`min-h-screen ${status === "welcome" ? "bg-secondary-100 bg-diagonal-split flex items-center justify-center md:block" : "bg-secondary-100"}`}>
       <main className={`px-4 py-8 ${status === "welcome" ? "max-w-xl md:absolute md:bottom-16 md:left-[8%]" : "container mx-auto max-w-3xl"}`}>
-        <header className={`mb-6 ${status === "welcome" ? "text-center md:text-left" : "text-center"}`}>
-          <h1 className="text-5xl font-bold text-gray-800 mb-2">
+        <header className={`mb-6 ${status === "welcome" ? "text-center md:text-left" : "flex items-center justify-between max-w-2xl mx-auto px-2"}`}>
+          <h1 className={`font-bold text-gray-800 mb-2 ${status === "welcome" ? "text-3xl md:text-5xl" : "text-2xl md:text-3xl flex items-center gap-3"}`}>
+            {status !== "welcome" && <img src="/dinner.svg" alt="" aria-hidden="true" className="w-8 h-8" />}
             What's for Dinner
           </h1>
+          {status === "questions" && (
+            <button
+              onClick={startOver}
+              aria-label="Return to start"
+              className="text-gray-500 hover:text-gray-700 flex items-center gap-1 text-sm"
+            >
+              <span aria-hidden="true">&larr;</span> <span className="hidden md:inline">Back to start</span><span className="md:hidden">Back</span>
+            </button>
+          )}
         </header>
 
         {status === "welcome" && (
@@ -61,7 +71,7 @@ export function Home() {
         )}
 
         {status === "questions" && (
-          <>
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl py-6 px-7 max-w-2xl mx-auto">
             <ProgressBar current={currentIndex} total={totalQuestions} />
 
             {error && (
@@ -76,14 +86,16 @@ export function Home() {
               onAnswer={handleAnswer}
             />
 
-            <button
-              onClick={canGoBack ? goBack : startOver}
-              aria-label={canGoBack ? "Go back to previous question" : "Return to start"}
-              className="mt-6 text-gray-500 hover:text-gray-700 flex items-center gap-2 mx-auto"
-            >
-              <span aria-hidden="true">←</span> {canGoBack ? "Go back" : "Back to start"}
-            </button>
-          </>
+            {canGoBack && (
+              <button
+                onClick={goBack}
+                aria-label="Go back to previous question"
+                className="mt-6 text-gray-500 hover:text-gray-700 flex items-center gap-2 mx-auto"
+              >
+                <span aria-hidden="true">&larr;</span> Previous
+              </button>
+            )}
+          </div>
         )}
 
         {status === "loading" && <LoadingSpinner />}

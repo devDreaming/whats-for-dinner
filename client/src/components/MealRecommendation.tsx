@@ -16,8 +16,7 @@ export function MealRecommendation({
   return (
     <div className="w-full max-w-2xl mx-auto">
       <div className="text-center mb-8">
-        <img src="/dinner.svg" alt="" aria-hidden="true" className="w-16 h-16 mb-4 mx-auto" />
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">{meal.name}</h2>
+        <h2 className="text-2xl text-gray-800 mb-2">{meal.name}</h2>
         <p className="text-gray-600">{meal.description}</p>
       </div>
 
